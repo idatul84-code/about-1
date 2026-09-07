@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nineteen Years In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20242b;
+    --ink-soft:#5b6068;
+    --line: rgba(32,36,43,0.14);
+    --paper:#FDF8E7;
+    --panel:#faf9f7;
+
+    --c1:#4FA893; /* Where It Began: pastel teal */
+    --c1-tint:#E1F4EF;
+    --c2:#8189D6; /* Behind the Scenes: pastel periwinkle */
+    --c2-tint:#EAEBFA;
+    --c3:#D283A8; /* Proving My Place: pastel rose */
+    --c3-tint:#FAEAF1;
+    --c4:#C1622A; /* Still Learning: darker orange */
+    --c4-tint:#FBE4D2;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:#FFFFFF;
+    color:var(--ink);
+    font-family:'Source Serif 4',Georgia,'Times New Roman',serif;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:40px 24px 60px;
+  }
+
+  .card{
+    position:relative;
+    background:#f1ee8e;
+    border-radius:28px;
+    box-shadow:0 10px 30px rgba(32,36,43,0.10);
+    padding:32px 32px 40px;
+    overflow:hidden;
+  }
+
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:6px;
+    background:linear-gradient(to right,
+      var(--c1) 0%, var(--c1) 25%,
+      var(--c2) 25%, var(--c2) 50%,
+      var(--c3) 50%, var(--c3) 75%,
+      var(--c4) 75%, var(--c4) 100%);
+  }
+
+  h1{
+    font-weight:600;
+    font-size:clamp(22px,3.5vw,26px);
+    line-height:1.25;
+    margin:0 0 14px;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+
+  .intro{
+    font-style:italic;
+    font-size:16px;
+    line-height:1.65;
+    color:var(--ink-soft);
+    margin:0 0 28px;
+    max-width:560px;
+  }
+
+  .kicker{
+    font-style:normal;
+    font-size:12px;
+    font-weight:600;
+    line-height:1.4;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    margin:0 0 10px;
+    max-width:560px;
+  }
+
+  /* ---------- Accordion ---------- */
+  .accordion{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:8px;
+  }
+
+  .acc-item{
+    border:1px solid var(--line);
+    border-radius:22px;
+    background:var(--panel);
+    overflow:hidden;
+  }
+
+  .acc-header{
+    appearance:none;
+    width:100%;
+    border:none;
+    background:var(--tint,var(--panel));
+    color:var(--ink);
+    font-family:'Source Serif 4',Georgia,'Times New Roman',serif;
+    font-size:18px;
+    font-weight:600;
+    padding:15px 18px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-align:left;
+    transition:background .15s ease;
+  }
+
+  .acc-header .dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--dot,var(--ink-soft));
+    flex:none;
+  }
+
+  .acc-header .chev-circle{
+    margin-left:auto;
+    flex:none;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--dot,var(--ink-soft));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .25s ease;
+  }
+
+  .acc-header .chev-circle svg{
+    width:12px;
+    height:12px;
+    transition:transform .25s ease;
+  }
+
+  .acc-header[aria-expanded="true"] .chev-circle svg{
+    transform:rotate(180deg);
+  }
+
+  .acc-header:hover .chev-circle{
+    transform:scale(1.08);
+  }
+
+  .acc-header:focus-visible{ outline:2px solid var(--ink); outline-offset:-2px; }
+
+  .acc-panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+
+  .acc-panel-inner{
+    padding:4px 18px 22px;
+  }
+
+  .acc-panel-inner p{
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink);
+    margin:0 0 14px;
+  }
+
+  .acc-panel-inner p:last-of-type{ margin-bottom:0; }
+
+  @media (prefers-reduced-motion: reduce){
+    .acc-panel, .acc-header .chev{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<div class="card">
+
+  <p class="intro">🧭 Before the teaching, there is a story. A journey shaped by experiences, challenges, people, and the lessons I continue to learn along the way.</p>
+
+  <div class="accordion">
+
+    <div class="acc-item" style="--dot:var(--c1); --tint:var(--c1-tint);">
+      <button class="acc-header" aria-expanded="true" data-acc="1">
+        <span class="dot"></span> Where It Began <span class="chev-circle"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="acc-panel" data-panel="1">
+        <div class="acc-panel-inner">
+          <p>My first classroom was in a private college on the outskirts of the city, back in 2007, my very first job even before I graduated with my degree. I taught language to students on their way to becoming doctors, alongside Diploma students.</p>
+          <p>At the time, I had no idea that this small beginning would eventually take me to the heart of Kuala Lumpur and into the world of Translation and Interpreting.</p>
+          <p>For more than a decade, I was part of the Malaysian Institute of Translation &amp; Books (ITBM), Malaysia's national translation institution, where Translation became a central part of my professional life.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item" style="--dot:var(--c2); --tint:var(--c2-tint);">
+      <button class="acc-header" aria-expanded="false" data-acc="2">
+        <span class="dot"></span> Behind the Scenes <span class="chev-circle"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="acc-panel" data-panel="2">
+        <div class="acc-panel-inner">
+          <p>I taught and trained people from remarkably diverse professional and educational backgrounds, a reminder that this field never draws from just one kind of mind.</p>
+          <p>My involvement in Interpreting took me behind the scenes, managing assignments and working closely with interpreters.</p>
+          <p>Along the way, I found myself in spaces far removed from the classroom, meeting everyone from VVIPs and diplomats to individuals behind prison bars.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item" style="--dot:var(--c3); --tint:var(--c3-tint);">
+      <button class="acc-header" aria-expanded="false" data-acc="3">
+        <span class="dot"></span> Proving My Place <span class="chev-circle"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="acc-panel" data-panel="3">
+        <div class="acc-panel-inner">
+          <p>There was a moment early in my career when my credibility as an educator was questioned because I held only a Bachelor's degree.</p>
+          <p>Looking back, that experience stayed with me. In many ways, it became one of the reasons I continued my own academic journey, beginning with a Master's degree, and eventually going further.</p>
+          <p>In time, my role with ITBM shifted. I moved on to teach Translation at ASWARA, all while continuing my journey toward a PhD. Yet the connection with the national institution never fully ended, as I remain actively engaged in translation reviewing and evaluation to this day.</p>
+          <p>Alongside all this, I stayed active doing freelance translation and book editing work, to stay visible in the industry and maintain and expand my network.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item" style="--dot:var(--c4); --tint:var(--c4-tint);">
+      <button class="acc-header" aria-expanded="false" data-acc="4">
+        <span class="dot"></span> Still Learning <span class="chev-circle"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </button>
+      <div class="acc-panel" data-panel="4">
+        <div class="acc-panel-inner">
+          <p>Nineteen years, and still learning.</p>
+          <p>These experiences shaped how I teach. Translation and Interpreting are never just about language, but about people, trust, and judgment when there's no easy answer.</p>
+          <p>That's why I aim to prepare students for the realities of the industry, not just theory. Because with AI reshaping this profession, teaching is never something we master, only something we keep evolving with.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<script>
+  const headers = document.querySelectorAll('.acc-header');
+
+  function openPanel(panel){
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  }
+
+  headers.forEach(header => {
+    header.addEventListener('click', () => {
+      const id = header.dataset.acc;
+      const panel = document.querySelector('.acc-panel[data-panel="' + id + '"]');
+      const isOpen = header.getAttribute('aria-expanded') === 'true';
+
+      if(isOpen){
+        header.setAttribute('aria-expanded','false');
+        panel.style.maxHeight = null;
+      } else {
+        header.setAttribute('aria-expanded','true');
+        openPanel(panel);
+      }
+    });
+  });
+
+  // Open the first panel by default
+  window.addEventListener('load', () => {
+    const firstPanel = document.querySelector('.acc-panel[data-panel="1"]');
+    if(firstPanel) openPanel(firstPanel);
+  });
+
+  // Keep open panel's height correct if content reflows (e.g. font load)
+  window.addEventListener('resize', () => {
+    headers.forEach(header => {
+      if(header.getAttribute('aria-expanded') === 'true'){
+        const id = header.dataset.acc;
+        const panel = document.querySelector('.acc-panel[data-panel="' + id + '"]');
+        openPanel(panel);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
